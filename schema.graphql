@@ -1,0 +1,24 @@
+directive @hasPermissions(list: [ID!]!) on QUERY | MUTATION 
+
+type Permission {
+    id: ID!
+}
+
+type Role {
+    id: ID!
+    permissions: [ID!]!
+}
+
+type User {
+    id: ID!
+    roles: [ID!]!
+}
+
+type Query {
+    users(first: Int!, after: ID!): [User!]!
+    verify(tokenStr: String!): Boolean!
+}
+
+type Mutation {
+    login(idStr: String!, password: String!): String!
+}
